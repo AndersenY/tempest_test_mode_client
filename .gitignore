@@ -1,0 +1,14 @@
+# Байт-код
+*.pyc
+*.pyo
+__pycache__/
+
+# Виртуальные окружения
+venv/
+env/
+.venv/
+
+# IDE
+.idea/
+.vscode/
+*.swp
