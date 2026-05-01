@@ -29,8 +29,21 @@ def slider_row(layout: QVBoxLayout, label: str, lo: int, hi: int,
 def green_btn(text: str, slot: Callable) -> QPushButton:
     btn = QPushButton(text)
     btn.setStyleSheet(
-        "background:#2e7d32; color:white; "
-        "padding:8px 14px; border-radius:4px;"
+        "QPushButton {"
+        "  background:#2e7d32; color:white;"
+        "  padding:8px 14px; border-radius:4px;"
+        "  border:none;"
+        "}"
+        "QPushButton:hover {"
+        "  background:#43a047;"
+        "}"
+        "QPushButton:pressed {"
+        "  background:#1b5e20;"
+        "  padding:9px 13px 7px 15px;"
+        "}"
+        "QPushButton:disabled {"
+        "  background:#a5d6a7; color:#eee;"
+        "}"
     )
     btn.clicked.connect(slot)
     return btn
@@ -39,8 +52,21 @@ def green_btn(text: str, slot: Callable) -> QPushButton:
 def red_btn(text: str, slot: Callable) -> QPushButton:
     btn = QPushButton(text)
     btn.setStyleSheet(
-        "background:#c62828; color:white; "
-        "padding:8px 14px; border-radius:4px;"
+        "QPushButton {"
+        "  background:#c62828; color:white;"
+        "  padding:8px 14px; border-radius:4px;"
+        "  border:none;"
+        "}"
+        "QPushButton:hover {"
+        "  background:#e53935;"
+        "}"
+        "QPushButton:pressed {"
+        "  background:#7f0000;"
+        "  padding:9px 13px 7px 15px;"
+        "}"
+        "QPushButton:disabled {"
+        "  background:#ef9a9a; color:#eee;"
+        "}"
     )
     btn.clicked.connect(slot)
     return btn

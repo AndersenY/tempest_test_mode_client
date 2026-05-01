@@ -91,7 +91,11 @@ class App(QMainWindow):
 
         self._conn_btn = QPushButton("Подключиться")
         self._conn_btn.setStyleSheet(
-            "background:#1976D2; color:white; padding:5px 14px; border-radius:4px;"
+            "QPushButton { background:#1976D2; color:white; padding:5px 14px;"
+            " border-radius:4px; border:none; }"
+            "QPushButton:hover { background:#1e88e5; }"
+            "QPushButton:pressed { background:#0d47a1; padding:6px 13px 4px 15px; }"
+            "QPushButton:disabled { background:#90caf9; color:#eee; }"
         )
         self._conn_btn.clicked.connect(self._toggle_connection)
         conn_row.addWidget(self._conn_btn)
@@ -131,8 +135,10 @@ class App(QMainWindow):
 
         stop_all_btn = QPushButton("■  Остановить все тесты")
         stop_all_btn.setStyleSheet(
-            "background:#b71c1c; color:white; padding:7px; "
-            "font-size:13px; border-radius:4px;"
+            "QPushButton { background:#b71c1c; color:white; padding:7px;"
+            " font-size:13px; border-radius:4px; border:none; }"
+            "QPushButton:hover { background:#e53935; }"
+            "QPushButton:pressed { background:#7f0000; padding:8px 6px 6px 8px; }"
         )
         stop_all_btn.clicked.connect(self._stop_all)
         root.addWidget(stop_all_btn)
@@ -148,7 +154,12 @@ class App(QMainWindow):
         log_layout.addWidget(self._log)
 
         save_btn = QPushButton("Сохранить журнал…")
-        save_btn.setStyleSheet("padding:4px 10px;")
+        save_btn.setStyleSheet(
+            "QPushButton { padding:4px 10px; border-radius:4px;"
+            " background:#455a64; color:white; border:none; }"
+            "QPushButton:hover { background:#546e7a; }"
+            "QPushButton:pressed { background:#263238; padding:5px 9px 3px 11px; }"
+        )
         save_btn.clicked.connect(self._save_log)
         log_layout.addWidget(save_btn, alignment=AlignRight)
 
@@ -189,7 +200,10 @@ class App(QMainWindow):
         if connected:
             self._conn_btn.setText("Отключиться")
             self._conn_btn.setStyleSheet(
-                "background:#c62828; color:white; padding:5px 14px; border-radius:4px;"
+                "QPushButton { background:#c62828; color:white; padding:5px 14px;"
+                " border-radius:4px; border:none; }"
+                "QPushButton:hover { background:#e53935; }"
+                "QPushButton:pressed { background:#7f0000; padding:6px 13px 4px 15px; }"
             )
             self._conn_status.setText("● Подключено")
             self._conn_status.setStyleSheet("color:#2e7d32; font-size:11px; font-weight:bold;")
@@ -199,7 +213,11 @@ class App(QMainWindow):
         else:
             self._conn_btn.setText("Подключиться")
             self._conn_btn.setStyleSheet(
-                "background:#1976D2; color:white; padding:5px 14px; border-radius:4px;"
+                "QPushButton { background:#1976D2; color:white; padding:5px 14px;"
+                " border-radius:4px; border:none; }"
+                "QPushButton:hover { background:#1e88e5; }"
+                "QPushButton:pressed { background:#0d47a1; padding:6px 13px 4px 15px; }"
+                "QPushButton:disabled { background:#90caf9; color:#eee; }"
             )
             self._conn_status.setText("● Не подключено")
             self._conn_status.setStyleSheet("color:#999; font-size:11px;")
