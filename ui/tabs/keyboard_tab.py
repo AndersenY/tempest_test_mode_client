@@ -18,15 +18,15 @@ class KeyboardTab(QWidget):
         lay.setSpacing(10)
         lay.setContentsMargins(14, 14, 14, 14)
 
-        desc = QLabel(
+        self._desc = QLabel(
             "Периодические нажатия клавиши <b>Scroll Lock</b> с "
             "фиксированным интервалом.<br>"
             "Создаёт детерминированный импульсный сигнал на шине USB/PS2.<br>"
             "Поддерживаемые ОС: Windows, Linux (X11/Wayland), macOS."
         )
-        desc.setWordWrap(True)
-        desc.setStyleSheet("color:#444; padding:4px;")
-        lay.addWidget(desc)
+        self._desc.setWordWrap(True)
+        self._desc.setStyleSheet("color:#444; padding:4px;")
+        lay.addWidget(self._desc)
 
         self._interval: QSlider = slider_row(
             lay, "Интервал (мс):", 10, 500, 50, " мс"
@@ -52,6 +52,11 @@ class KeyboardTab(QWidget):
         btn_row.addStretch()
         lay.addLayout(btn_row)
         lay.addStretch()
+
+    def set_theme(self, t: dict) -> None:
+        self._desc.setStyleSheet(f"color:{t['text_muted']}; padding:4px;")
+        self._freq_lbl.setStyleSheet(f"color:{t['freq_color']}; font-weight:bold;")
+        self._status.set_theme(t)
 
     def _update_freq(self, ms: int) -> None:
         if ms > 0:

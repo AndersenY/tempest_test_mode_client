@@ -18,15 +18,15 @@ class PrinterTab(QWidget):
         lay.setSpacing(10)
         lay.setContentsMargins(14, 14, 14, 14)
 
-        desc = QLabel(
+        self._desc = QLabel(
             "Непрерывная посылка паттерна <b>0xFF/0x00×64</b> на "
             "принтерный порт.<br>"
             "Меандр на уровне байт — максимальная частота переключений "
             "на шине."
         )
-        desc.setWordWrap(True)
-        desc.setStyleSheet("color:#444; padding:4px;")
-        lay.addWidget(desc)
+        self._desc.setWordWrap(True)
+        self._desc.setStyleSheet("color:#444; padding:4px;")
+        lay.addWidget(self._desc)
 
         port_row = QHBoxLayout()
         port_row.addWidget(QLabel("Порт / имя принтера:"))
@@ -61,6 +61,10 @@ class PrinterTab(QWidget):
         btn_row.addStretch()
         lay.addLayout(btn_row)
         lay.addStretch()
+
+    def set_theme(self, t: dict) -> None:
+        self._desc.setStyleSheet(f"color:{t['text_muted']}; padding:4px;")
+        self._status.set_theme(t)
 
     def _start(self) -> None:
         self._test.start(

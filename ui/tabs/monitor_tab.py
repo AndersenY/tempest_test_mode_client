@@ -18,15 +18,15 @@ class MonitorTab(QWidget):
         lay.setSpacing(10)
         lay.setContentsMargins(14, 14, 14, 14)
 
-        desc = QLabel(
+        self._desc = QLabel(
             "Паттерн: чередование чёрных/белых <b>горизонтальных</b> "
             "полос заданной высоты.<br>"
             "Создаёт меандр на видеоинтерфейсе — максимальная частота "
             "переключений пикселей."
         )
-        desc.setWordWrap(True)
-        desc.setStyleSheet("color:#444; padding:4px;")
-        lay.addWidget(desc)
+        self._desc.setWordWrap(True)
+        self._desc.setStyleSheet("color:#444; padding:4px;")
+        lay.addWidget(self._desc)
 
         self._stripe = slider_row(lay, "Высота полосы (px):", 1, 256, 32, " px")
         self._blink  = slider_row(lay, "Интервал инверсии (мс):", 50, 5000, 500, " мс")
@@ -46,6 +46,10 @@ class MonitorTab(QWidget):
 
         lay.addWidget(hint_label("Горячая клавиша для остановки: ESC (в окне теста)"))
         lay.addStretch()
+
+    def set_theme(self, t: dict) -> None:
+        self._desc.setStyleSheet(f"color:{t['text_muted']}; padding:4px;")
+        self._status.set_theme(t)
 
     def _start(self) -> None:
         self._test.start(

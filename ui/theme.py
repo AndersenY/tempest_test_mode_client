@@ -1,0 +1,43 @@
+from __future__ import annotations
+
+DARK: dict = {
+    "name": "dark",
+    "bg_window":         "#1e1e1e",
+    "bg_widget":         "#2b2b2b",
+    "bg_input":          "#333333",
+    "bg_log":            "#1e1e1e",
+    "border":            "#444444",
+    "border_input":      "#555555",
+    "text":              "#e0e0e0",
+    "text_dim":          "#cccccc",
+    "text_muted":        "#aaaaaa",
+    "conn_btn_bg":       "#2b5a8c",
+    "conn_btn_hover":    "#1e3d5c",
+    "conn_btn_dis":      "#1a3a5a",
+    "conn_btn_dis_text": "#88aacc",
+    "freq_color":        "#4FC3F7",
+    "dot_border":        "#666666",
+    "remote_lbl_color":  "#64B5F6",
+    "tab_sel":           "#3a3a3a",
+}
+
+LIGHT: dict = {
+    "name": "light",
+    "bg_window":         "#f0f0f0",
+    "bg_widget":         "#ffffff",
+    "bg_input":          "#ffffff",
+    "bg_log":            "#f8f8f8",
+    "border":            "#cccccc",
+    "border_input":      "#bbbbbb",
+    "text":              "#1a1a1a",
+    "text_dim":          "#333333",
+    "text_muted":        "#666666",
+    "conn_btn_bg":       "#3a6ea8",
+    "conn_btn_hover":    "#2a5280",
+    "conn_btn_dis":      "#90bada",
+    "conn_btn_dis_text": "#eeeeee",
+    "freq_color":        "#1565C0",
+    "dot_border":        "#aaaaaa",
+    "remote_lbl_color":  "#1565C0",
+    "tab_sel":           "#ffffff",
+}

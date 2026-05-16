@@ -28,7 +28,9 @@ class RemoteClient:
         self._sock: socket.socket | None = None
         self._thread: threading.Thread | None = None
         self._running = False
+        self.on_ready: Callable[[], None] = lambda: None
         self.on_command: Callable[[str], None] = lambda cmd: None
+        self.on_mode_changed: Callable[[str], None] = lambda mode: None
         self.on_disconnected: Callable[[], None] = lambda: None
 
     # ── Публичный интерфейс ────────────────────────────────────────────
@@ -56,6 +58,10 @@ class RemoteClient:
         self._running = False
         if self._sock:
             try:
+                self._sock.shutdown(socket.SHUT_RDWR)
+            except OSError:
+                pass
+            try:
                 self._sock.close()
             except OSError:
                 pass
@@ -75,12 +81,16 @@ class RemoteClient:
 
     def _recv_loop(self) -> None:
         buf = ""
+        ready = False
         try:
             while self._running:
                 assert self._sock is not None
                 chunk = self._sock.recv(512)
                 if not chunk:
                     break
+                if not ready:
+                    ready = True
+                    self.on_ready()
                 buf += chunk.decode(errors="replace")
                 while "\n" in buf:
                     line, buf = buf.split("\n", 1)
@@ -93,6 +103,11 @@ class RemoteClient:
                         continue
                     cmd = msg.get("cmd", "")
                     if cmd == "ping":
+                        if "mode" in msg:
+                            self.on_mode_changed(msg["mode"])
+                        continue
+                    if cmd == "mode":
+                        self.on_mode_changed(msg.get("mode", "manual"))
                         continue
                     if cmd:
                         self.on_command(cmd)
