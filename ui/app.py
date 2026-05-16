@@ -231,10 +231,10 @@ class App(QMainWindow):
         if cmd == "test_start":
             self._remote_start()
         elif cmd == "test_stop":
-            self._stop_all()
+            self._remote_stop()
 
     def _remote_start(self) -> None:
-        """Запускает тест на активной вкладке."""
+        """Запускает тест на активной вкладке и подтверждает серверу."""
         idx = self._tabs.currentIndex()
         tab_names = {0: "монитора", 1: "клавиатуры", 2: "принтера"}
         self._logger.log(f"[Сеть] Команда: запуск теста {tab_names.get(idx, '?')}")
@@ -244,6 +244,14 @@ class App(QMainWindow):
             self._kbd_tab._start()
         elif idx == 2:
             self._prt_tab._start()
+        self._remote.send_ack(active=True)
+        self._logger.log("[Сеть] ACK отправлен серверу (тест запущен).")
+
+    def _remote_stop(self) -> None:
+        """Останавливает все тесты и подтверждает серверу."""
+        self._stop_all()
+        self._remote.send_ack(active=False)
+        self._logger.log("[Сеть] ACK отправлен серверу (тест остановлен).")
 
     def _on_remote_disconnected(self) -> None:
         self._set_conn_ui(connected=False)

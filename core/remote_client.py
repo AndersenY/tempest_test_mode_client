@@ -61,6 +61,16 @@ class RemoteClient:
                 pass
             self._sock = None
 
+    def send_ack(self, active: bool) -> None:
+        """Отправить подтверждение серверу после запуска/остановки теста."""
+        if self._sock is None:
+            return
+        data = (json.dumps({"status": "ack", "active": active}) + "\n").encode()
+        try:
+            self._sock.sendall(data)
+        except OSError:
+            pass
+
     # ── Внутренняя реализация ──────────────────────────────────────────
 
     def _recv_loop(self) -> None:

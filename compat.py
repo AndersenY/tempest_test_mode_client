@@ -15,7 +15,7 @@ try:
         QVBoxLayout, QWidget,
     )
     from PyQt6.QtCore import QObject, QThread, Qt, QTimer, pyqtSignal
-    from PyQt6.QtGui import QColor, QFont, QPainter, QPixmap, QTextCursor
+    from PyQt6.QtGui import QColor, QFont, QIcon, QPainter, QPixmap, QTextCursor
 
     AlignCenter = Qt.AlignmentFlag.AlignCenter
     AlignRight  = Qt.AlignmentFlag.AlignRight
@@ -33,7 +33,7 @@ except ImportError:
         QVBoxLayout, QWidget,
     )
     from PyQt5.QtCore import QObject, QThread, Qt, QTimer, pyqtSignal  # type: ignore[no-redef]
-    from PyQt5.QtGui import QColor, QFont, QPainter, QPixmap, QTextCursor  # type: ignore[no-redef]
+    from PyQt5.QtGui import QColor, QFont, QIcon, QPainter, QPixmap, QTextCursor  # type: ignore[no-redef]
 
     AlignCenter = Qt.AlignCenter  # type: ignore[attr-defined]
     AlignRight  = Qt.AlignRight  # type: ignore[attr-defined]
